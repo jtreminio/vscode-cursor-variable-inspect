@@ -1,0 +1,66 @@
+{
+  "name": "inspect-variable",
+  "displayName": "Inspect Variable",
+  "description": "Enhanced variable inspection during debugging with word-wrapped display",
+  "version": "0.1.0",
+  "publisher": "Juan Treminio",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Debuggers"
+  ],
+  "activationEvents": [
+    "onDebug"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "inspect-variable.inspectVariable",
+        "title": "Inspect"
+      }
+    ],
+    "menus": {
+      "debug/variables/context": [
+        {
+          "command": "inspect-variable.inspectVariable",
+          "when": "debugState == 'stopped'"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Inspect Variable",
+      "properties": {
+        "inspect-variable.enableDebugLogging": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug logging to the output channel for troubleshooting"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run build:extension && npm run build:webview && npm run copy-webview",
+    "build:extension": "node esbuild.extension.js",
+    "build:webview": "node esbuild.webview.js",
+    "copy-webview": "mkdir -p out/webview && cp src/webview/styles.css src/webview/template.html out/webview/",
+    "watch": "node esbuild.extension.js --watch & node esbuild.webview.js --watch",
+    "lint": "eslint src --ext ts",
+    "lint:fix": "eslint src --ext ts --fix",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.45.0"
+  }
+}

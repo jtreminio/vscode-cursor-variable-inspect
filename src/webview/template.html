@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline';">
+    <title>Inspect: {{VARIABLE_NAME}}</title>
+    <style>
+        {{STYLES}}
+    </style>
+</head>
+<body>
+    <div class="variable-container">
+        <div class="variable-header">Inspect: {{VARIABLE_NAME_ESCAPED}}</div>
+        <div class="variable-content" id="variable-content">
+            {{TREE_HTML}}
+        </div>
+        <div>
+            <button class="copy-button" id="copy-button">Copy to Clipboard</button>
+            <span class="copied-message" id="copied-message">✓ Copied!</span>
+        </div>
+    </div>
+    <div class="context-menu" id="context-menu">
+        <div class="context-menu-item" id="inspect-menu-item">Inspect</div>
+    </div>
+    <script>
+        {{SCRIPT}}
+        
+        // Set up button click handler after script loads
+        (function() {
+            const copyButton = document.getElementById('copy-button');
+            if (copyButton) {
+                copyButton.addEventListener('click', copyToClipboard);
+            }
+            
+            const inspectMenuItem = document.getElementById('inspect-menu-item');
+            if (inspectMenuItem) {
+                inspectMenuItem.addEventListener('click', inspectFromContextMenu);
+            }
+        })();
+    </script>
+</body>
+</html>

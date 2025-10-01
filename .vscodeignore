@@ -1,0 +1,11 @@
+.vscode/**
+.vscode-test/**
+src/**
+.gitignore
+.python-version
+tsconfig.json
+main.py
+pyproject.toml
+**/*.map
+**/*.ts
+
