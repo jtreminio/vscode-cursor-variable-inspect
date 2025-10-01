@@ -1,7 +1,6 @@
 # Node.js / TypeScript
 node_modules/
 out/
-*.vsix
 *.map
 
 # IDE
